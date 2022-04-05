@@ -1,0 +1,21 @@
+.profile__avatar {
+  border-radius: 50%;
+  margin: 0;
+  height: 120px;
+  width: 120px;
+  justify-self: center;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 888px) {
+  .profile__avatar {
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .profile__avatar {
+    grid-area: ava;
+  }
+}
