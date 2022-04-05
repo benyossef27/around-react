@@ -8,6 +8,7 @@ export default function Card({ onCardClick, card, onDeleteClick }) {
         className="card__image"
         onClick={handleClick}
         style={{ backgroundImage: `url(${card.link})` }}
+        aria-label={card.name}
       />
       <button
         className="card__delete-button"

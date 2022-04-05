@@ -3,7 +3,6 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import * as ReactDOMClient from "react-dom/client";
-import Header from "./components/Header";
 const container = document.getElementById("root");
 // Create a root.
 const root = ReactDOMClient.createRoot(container);

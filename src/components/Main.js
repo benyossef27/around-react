@@ -1,4 +1,3 @@
-import avatar from "../images/profile/profile__avatar.svg";
 import avatar_edit from "../images/profile/profile__popup-button.svg";
 import React, { useEffect, useState } from "react";
 import { api } from "../utils/Api";
@@ -11,7 +10,7 @@ export default function Main({
   onDeleteClick,
   onCardClick,
 }) {
-  const [usserName, setUserName] = useState("");
+  const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
@@ -43,11 +42,11 @@ export default function Main({
             className="profile__avatar"
             style={{ backgroundImage: `url(${userAvatar})` }}
           />
-          <img className="profile__avatar-edit" src={avatar_edit} alt="edit" />
+          <img className="profile__avatar-edit" src={avatar_edit} />
         </div>
         <div className="profile__details">
-          <h1 className="profile__name">Jacques Cousteau</h1>
-          <p className="profile__job">Explorer</p>
+          <h1 className="profile__name">{userName}</h1>
+          <p className="profile__job">{userDescription}r</p>
         </div>
         <button
           className="profile__popup-button"
