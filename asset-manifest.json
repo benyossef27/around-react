@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/%7Baround-react%7D/static/css/main.f312f51d.css",
+    "main.js": "/%7Baround-react%7D/static/js/main.8a79bf73.js",
+    "static/js/787.1c78f32b.chunk.js": "/%7Baround-react%7D/static/js/787.1c78f32b.chunk.js",
+    "static/media/profile__avatar.svg": "/%7Baround-react%7D/static/media/profile__avatar.e321b4370530e922e6d901ac55971a52.svg",
+    "static/media/Inter-Medium.woff?v=3.19": "/%7Baround-react%7D/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Black.woff?v=3.19": "/%7Baround-react%7D/static/media/Inter-Black.c6938660eec019fefd68.woff",
+    "static/media/Inter-Regular.woff?v=3.19": "/%7Baround-react%7D/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Medium.woff2?v=3.19": "/%7Baround-react%7D/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-Black.woff2?v=3.19": "/%7Baround-react%7D/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-Regular.woff2?v=3.19": "/%7Baround-react%7D/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "static/media/header__title.svg": "/%7Baround-react%7D/static/media/header__title.66cff89119b58975ea644f9d7f47a8c5.svg",
+    "index.html": "/%7Baround-react%7D/index.html",
+    "static/media/delete-button.svg": "/%7Baround-react%7D/static/media/delete-button.ba43124316072f7a8629.svg",
+    "static/media/lbe.svg": "/%7Baround-react%7D/static/media/lbe.1c9aa8bd7665548f48c3.svg",
+    "static/media/lbb.svg": "/%7Baround-react%7D/static/media/lbb.f8482d28867cec189b08.svg",
+    "static/media/popup__close.svg": "/%7Baround-react%7D/static/media/popup__close.e6c3a9a9a26912881a20.svg",
+    "static/media/profile__popup-button.svg": "/%7Baround-react%7D/static/media/profile__popup-button.6c7bf05444b9793fdf6e73a2dd202e7e.svg",
+    "static/media/profile__add-button.svg": "/%7Baround-react%7D/static/media/profile__add-button.bed8c136e13907f5eefb.svg",
+    "main.f312f51d.css.map": "/%7Baround-react%7D/static/css/main.f312f51d.css.map",
+    "main.8a79bf73.js.map": "/%7Baround-react%7D/static/js/main.8a79bf73.js.map",
+    "787.1c78f32b.chunk.js.map": "/%7Baround-react%7D/static/js/787.1c78f32b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f312f51d.css",
+    "static/js/main.8a79bf73.js"
+  ]
+}
