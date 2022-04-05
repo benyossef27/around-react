@@ -2,7 +2,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import PopupWithImage from "./PopupWithImage";
+import ImagePopup from "./ImagePopup";
 import { useState } from "react";
 
 export default function App() {
@@ -128,10 +128,7 @@ export default function App() {
           isOpen={isDeletePopupOpen}
           onClose={closePopups}
         ></PopupWithForm>
-        <PopupWithImage
-          card={selectedCard}
-          onClose={closePopups}
-        ></PopupWithImage>
+        <ImagePopup card={selectedCard} onClose={closePopups}></ImagePopup>
         <Footer />
         {/* <div className='popup popup_type_profile' id='popupprofile'>
           <div className='popup__container'>
