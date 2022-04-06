@@ -11,3 +11,9 @@
 .profile__avatar-box:hover .profile__avatar-edit {
   opacity: 1;
 }
+
+@media screen and (max-width: 675px) {
+  .profile__avatar-box {
+    grid-area: ava;
+  }
+}

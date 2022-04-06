@@ -10,7 +10,7 @@ export default function App() {
   const [isAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(undefined);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
@@ -33,7 +33,7 @@ export default function App() {
     setIsAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePopupOpen(false);
-    setSelectedCard(undefined);
+    setSelectedCard(null);
   }
   return (
     <div className="page">
