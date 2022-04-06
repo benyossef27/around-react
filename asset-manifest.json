@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/%7Baround-react%7D/static/css/main.6640d9c5.css",
-    "main.js": "/%7Baround-react%7D/static/js/main.0cf04026.js",
+    "main.css": "/%7Baround-react%7D/static/css/main.31456147.css",
+    "main.js": "/%7Baround-react%7D/static/js/main.65493070.js",
     "static/js/787.923ecdfa.chunk.js": "/%7Baround-react%7D/static/js/787.923ecdfa.chunk.js",
     "static/media/Inter-Medium.woff?v=3.19": "/%7Baround-react%7D/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Black.woff?v=3.19": "/%7Baround-react%7D/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -17,12 +17,12 @@
     "static/media/popup__close.svg": "/%7Baround-react%7D/static/media/popup__close.e6c3a9a9a26912881a20.svg",
     "static/media/profile__popup-button.svg": "/%7Baround-react%7D/static/media/profile__popup-button.6c7bf05444b9793fdf6e73a2dd202e7e.svg",
     "static/media/profile__add-button.svg": "/%7Baround-react%7D/static/media/profile__add-button.bed8c136e13907f5eefb.svg",
-    "main.6640d9c5.css.map": "/%7Baround-react%7D/static/css/main.6640d9c5.css.map",
-    "main.0cf04026.js.map": "/%7Baround-react%7D/static/js/main.0cf04026.js.map",
+    "main.31456147.css.map": "/%7Baround-react%7D/static/css/main.31456147.css.map",
+    "main.65493070.js.map": "/%7Baround-react%7D/static/js/main.65493070.js.map",
     "787.923ecdfa.chunk.js.map": "/%7Baround-react%7D/static/js/787.923ecdfa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6640d9c5.css",
-    "static/js/main.0cf04026.js"
+    "static/css/main.31456147.css",
+    "static/js/main.65493070.js"
   ]
 }
