@@ -3,7 +3,9 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "../utils/Api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function App() {
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
@@ -11,6 +13,7 @@ export default function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [CurrentUser, setCurrentUser] = useState("");
 
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
@@ -35,101 +38,111 @@ export default function App() {
     setIsDeletePopupOpen(false);
     setSelectedCard(null);
   }
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((userData) => setCurrentUser(userData))
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }, []);
   return (
     <div className="page">
       <div className="root">
-        <Header />
-        <Main
-          onEditProfileClick={handleEditProfileClick}
-          onEditAvatarClick={handleAvatarClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onDeleteClick={handleDeleteClick}
-          onCardClick={handleCardClick}
-        />
-        <PopupWithForm
-          name="profile"
-          title="Edit profile"
-          submitButton="save"
-          isOpen={isProfilePopupOpen}
-          onClose={closePopups}
-        >
-          <input
-            id="name-input"
-            name="name"
-            type="text"
-            placeholder="Name"
-            className="popup__input popup__input_field_name"
-            minLength="2"
-            maxLength="40"
-            required
+        <CurrentUserContext.Provider value={CurrentUser}>
+          <Header />
+          <Main
+            onEditProfileClick={handleEditProfileClick}
+            onEditAvatarClick={handleAvatarClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onDeleteClick={handleDeleteClick}
+            onCardClick={handleCardClick}
           />
-          <span id="name-input-error"></span>
-          <input
-            id="job-input"
-            name="about"
-            type="text"
-            placeholder="About me"
-            className="popup__input popup__input_field_job"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span id="job-input-error"></span>
-        </PopupWithForm>
-        <PopupWithForm
-          name="avatar"
-          title="Edit avatar"
-          submitButton="save"
-          isOpen={isAvatarPopupOpen}
-          onClose={closePopups}
-        >
-          <input
-            id="avatar-img-input"
-            name="avatarImage"
-            type="url"
-            placeholder="Image Url"
-            className="popup__input popup__input_field_img"
-            required
-          />
-          <span id="avatar-img-input-error"></span>
-        </PopupWithForm>
-        <PopupWithForm
-          name="place"
-          title="Add place"
-          submitButton="Add"
-          isOpen={isAddPlacePopupOpen}
-          onClose={closePopups}
-        >
-          <input
-            id="place-title-input"
-            name="placeHeading"
-            type="text"
-            placeholder="Title"
-            className="popup__input popup__input_field_heading"
-            minLength="1"
-            maxLength="30"
-            required
-          />
-          <span id="place-title-input-error"></span>
-          <input
-            id="place-img-input"
-            name="placeImage"
-            type="url"
-            placeholder="Image Url"
-            className="popup__input popup__input_field_img"
-            required
-          />
-          <span id="place-img-input-error"></span>
-        </PopupWithForm>
-        <PopupWithForm
-          name="preview"
-          title="Are you sure?"
-          submitButton="Yes"
-          isOpen={isDeletePopupOpen}
-          onClose={closePopups}
-        ></PopupWithForm>
-        <ImagePopup card={selectedCard} onClose={closePopups}></ImagePopup>
-        <Footer />
+          <PopupWithForm
+            name="profile"
+            title="Edit profile"
+            submitButton="save"
+            isOpen={isProfilePopupOpen}
+            onClose={closePopups}
+          >
+            <input
+              id="name-input"
+              name="name"
+              type="text"
+              placeholder="Name"
+              className="popup__input popup__input_field_name"
+              minLength="2"
+              maxLength="40"
+              required
+            />
+            <span id="name-input-error"></span>
+            <input
+              id="job-input"
+              name="about"
+              type="text"
+              placeholder="About me"
+              className="popup__input popup__input_field_job"
+              minLength="2"
+              maxLength="200"
+              required
+            />
+            <span id="job-input-error"></span>
+          </PopupWithForm>
+          <PopupWithForm
+            name="avatar"
+            title="Edit avatar"
+            submitButton="save"
+            isOpen={isAvatarPopupOpen}
+            onClose={closePopups}
+          >
+            <input
+              id="avatar-img-input"
+              name="avatarImage"
+              type="url"
+              placeholder="Image Url"
+              className="popup__input popup__input_field_img"
+              required
+            />
+            <span id="avatar-img-input-error"></span>
+          </PopupWithForm>
+          <PopupWithForm
+            name="place"
+            title="Add place"
+            submitButton="Add"
+            isOpen={isAddPlacePopupOpen}
+            onClose={closePopups}
+          >
+            <input
+              id="place-title-input"
+              name="placeHeading"
+              type="text"
+              placeholder="Title"
+              className="popup__input popup__input_field_heading"
+              minLength="1"
+              maxLength="30"
+              required
+            />
+            <span id="place-title-input-error"></span>
+            <input
+              id="place-img-input"
+              name="placeImage"
+              type="url"
+              placeholder="Image Url"
+              className="popup__input popup__input_field_img"
+              required
+            />
+            <span id="place-img-input-error"></span>
+          </PopupWithForm>
+          <PopupWithForm
+            name="preview"
+            title="Are you sure?"
+            submitButton="Yes"
+            isOpen={isDeletePopupOpen}
+            onClose={closePopups}
+          ></PopupWithForm>
+          <ImagePopup card={selectedCard} onClose={closePopups}></ImagePopup>
+          <Footer />
+        </CurrentUserContext.Provider>
       </div>
     </div>
   );

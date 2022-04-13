@@ -2,6 +2,7 @@ import avatar_edit from "../images/profile/profile__popup-button.svg";
 import React, { useEffect, useState } from "react";
 import { api } from "../utils/Api";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Main({
   onEditProfileClick,
@@ -10,21 +11,9 @@ export default function Main({
   onDeleteClick,
   onCardClick,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
+  const currentUser = React.useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
     api
       .getInitialCards()
       .then((cardsData) => {
@@ -34,19 +23,20 @@ export default function Main({
         console.log(`Error: ${err}`);
       });
   }, []);
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-box" onClick={onEditAvatarClick}>
           <img
             className="profile__avatar"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           />
           <img className="profile__avatar-edit" src={avatar_edit} />
         </div>
         <div className="profile__details">
-          <h1 className="profile__name">{userName}</h1>
-          <p className="profile__job">{userDescription}r</p>
+          <h1 className="profile__name">{currentUser.name}</h1>
+          <p className="profile__job">{currentUser.about}r</p>
         </div>
         <button
           className="profile__popup-button"
