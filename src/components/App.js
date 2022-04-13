@@ -13,7 +13,7 @@ export default function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [CurrentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
 
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
@@ -49,7 +49,7 @@ export default function App() {
   return (
     <div className="page">
       <div className="root">
-        <CurrentUserContext.Provider value={CurrentUser}>
+        <CurrentUserContext.Provider value={currentUser}>
           <Header />
           <Main
             onEditProfileClick={handleEditProfileClick}

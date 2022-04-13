@@ -13,6 +13,7 @@ export default function Main({
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
+
   useEffect(() => {
     api
       .getInitialCards()
