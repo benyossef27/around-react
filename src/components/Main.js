@@ -24,6 +24,7 @@ export default function Main({
         console.log(`Error: ${err}`);
       });
   }, []);
+
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
@@ -33,6 +34,16 @@ export default function Main({
         )
       );
     });
+  }
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        cards.filter();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
   return (
     <main className="content">
@@ -67,7 +78,7 @@ export default function Main({
             key={card._id}
             card={card}
             onCardClick={onCardClick}
-            onDeleteClick={onDeleteClick}
+            onDeleteClick={handleCardDelete}
             onCardLike={handleCardLike}
           />
         ))}

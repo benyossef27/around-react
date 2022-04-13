@@ -6,9 +6,10 @@ import ImagePopup from "./ImagePopup";
 import { useEffect, useState } from "react";
 import { api } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
 
 export default function App() {
-  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
@@ -16,7 +17,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState("");
 
   function handleEditProfileClick() {
-    setIsProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
   function handleAvatarClick() {
     setIsAvatarPopupOpen(true);
@@ -32,7 +33,7 @@ export default function App() {
   }
 
   function closePopups() {
-    setIsProfilePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
     setIsAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsDeletePopupOpen(false);
@@ -58,36 +59,10 @@ export default function App() {
             onDeleteClick={handleDeleteClick}
             onCardClick={handleCardClick}
           />
-          <PopupWithForm
-            name="profile"
-            title="Edit profile"
-            submitButton="save"
-            isOpen={isProfilePopupOpen}
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
             onClose={closePopups}
-          >
-            <input
-              id="name-input"
-              name="name"
-              type="text"
-              placeholder="Name"
-              className="popup__input popup__input_field_name"
-              minLength="2"
-              maxLength="40"
-              required
-            />
-            <span id="name-input-error"></span>
-            <input
-              id="job-input"
-              name="about"
-              type="text"
-              placeholder="About me"
-              className="popup__input popup__input_field_job"
-              minLength="2"
-              maxLength="200"
-              required
-            />
-            <span id="job-input-error"></span>
-          </PopupWithForm>
+          />
           <PopupWithForm
             name="avatar"
             title="Edit avatar"

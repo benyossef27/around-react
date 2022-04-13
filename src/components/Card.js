@@ -17,6 +17,7 @@ export default function Card({ onCardClick, card, onDeleteClick, onCardLike }) {
   const cardLikeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_black" : ""
   }`;
+
   return (
     <div className="card">
       <div
