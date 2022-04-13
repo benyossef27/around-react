@@ -24,7 +24,16 @@ export default function Main({
         console.log(`Error: ${err}`);
       });
   }, []);
-
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) =>
+        state.map((currentCard) =>
+          currentCard._id === card._id ? newCard : currentCard
+        )
+      );
+    });
+  }
   return (
     <main className="content">
       <section className="profile">
@@ -59,6 +68,7 @@ export default function Main({
             card={card}
             onCardClick={onCardClick}
             onDeleteClick={onDeleteClick}
+            onCardLike={handleCardLike}
           />
         ))}
       </section>

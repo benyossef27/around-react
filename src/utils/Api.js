@@ -56,17 +56,18 @@ class Api extends React.Component {
       method: "DELETE",
     });
   }
-  likeCard(id) {
-    return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
-      headers: this._headers,
-      method: "PUT",
-    });
-  }
-  unlikeCard(id) {
-    return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
-      headers: this._headers,
-      method: "DELETE",
-    });
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
+        headers: this._headers,
+        method: "PUT",
+      });
+    } else {
+      return this._customFetch(`${this._baseUrl}/cards/likes/${id}`, {
+        headers: this._headers,
+        method: "DELETE",
+      });
+    }
   }
 }
 
