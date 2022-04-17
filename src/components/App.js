@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { api } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -31,7 +32,28 @@ export default function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
   }
-
+  function handleUpdateUser({ name, about }) {
+    api
+      .setUserInfo({ name, about })
+      .then((info) => {
+        setCurrentUser(info);
+        setIsEditProfilePopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }
+  function handleUpdateAvatar({ avatar }) {
+    api
+      .setUserAvatar(avatar)
+      .then((info) => {
+        setCurrentUser(info);
+        setIsAvatarPopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }
   function closePopups() {
     setIsEditProfilePopupOpen(false);
     setIsAvatarPopupOpen(false);
@@ -47,6 +69,7 @@ export default function App() {
         console.log(`Error: ${err}`);
       });
   }, []);
+
   return (
     <div className="page">
       <div className="root">
@@ -62,24 +85,13 @@ export default function App() {
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closePopups}
+            onUpdateUser={handleUpdateUser}
           />
-          <PopupWithForm
-            name="avatar"
-            title="Edit avatar"
-            submitButton="save"
+          <EditAvatarPopup
             isOpen={isAvatarPopupOpen}
             onClose={closePopups}
-          >
-            <input
-              id="avatar-img-input"
-              name="avatarImage"
-              type="url"
-              placeholder="Image Url"
-              className="popup__input popup__input_field_img"
-              required
-            />
-            <span id="avatar-img-input-error"></span>
-          </PopupWithForm>
+            onUpdateAvatar={handleUpdateAvatar}
+          />
           <PopupWithForm
             name="place"
             title="Add place"

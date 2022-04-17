@@ -39,7 +39,7 @@ export default function Main({
     api
       .deleteCard(card._id)
       .then(() => {
-        cards.filter();
+        setCards(cards.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
@@ -57,7 +57,7 @@ export default function Main({
         </div>
         <div className="profile__details">
           <h1 className="profile__name">{currentUser.name}</h1>
-          <p className="profile__job">{currentUser.about}r</p>
+          <p className="profile__job">{currentUser.about}</p>
         </div>
         <button
           className="profile__popup-button"

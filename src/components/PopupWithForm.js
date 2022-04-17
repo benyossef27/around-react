@@ -1,29 +1,23 @@
-export default function PopupWithForm({
-  name,
-  isOpen,
-  onClose,
-  title,
-  submitButton,
-  children,
-}) {
+export default function PopupWithForm(props) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}>
+    <div
+      className={`popup popup_type_${props.name} ${
+        props.isOpen ? "popup_opened" : ""
+      }`}
+    >
       <div className="popup__container">
         <button
           className="popup__close"
           aria-label="popupclose"
           type="button"
-          onClick={onClose}
+          onClick={props.onClose}
         ></button>
-        <h2 className="popup__heading">{title}</h2>
+        <h2 className="popup__heading">{props.title}</h2>
         <form
-          className={`popup__form popup__form_type_${name}`}
-          name={`${name}form`}
+          className={`popup__form popup__form_type_${props.name}`}
+          name={`${props.name}form`}
         >
-          {children}
-          <button type="submit" className="popup__button">
-            {submitButton}
-          </button>
+          {props.children}
         </form>
       </div>
     </div>
