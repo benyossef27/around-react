@@ -1,10 +1,13 @@
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function Card({ onCardClick, card, onDeleteClick, onCardLike }) {
+export default function Card({ onCardClick, card, onCardDelete, onCardLike }) {
   const currentUser = React.useContext(CurrentUserContext);
   function handleClick() {
     onCardClick(card);
+  }
+  function handleDeleteClick() {
+    onCardDelete(card);
   }
   function handleLikeClick() {
     onCardLike(card);
@@ -30,7 +33,7 @@ export default function Card({ onCardClick, card, onDeleteClick, onCardLike }) {
         className={cardDeleteButtonClassName}
         type="button"
         aria-label="delete"
-        onClick={onDeleteClick}
+        onClick={handleDeleteClick}
       />
       <div className="card__box">
         <h2 className="card__name">{card.name}</h2>

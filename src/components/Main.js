@@ -4,51 +4,13 @@ import { api } from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-export default function Main({
-  onEditProfileClick,
-  onEditAvatarClick,
-  onAddPlaceClick,
-  onDeleteClick,
-  onCardClick,
-}) {
+export default function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
-  }, []);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) =>
-        state.map((currentCard) =>
-          currentCard._id === card._id ? newCard : currentCard
-        )
-      );
-    });
-  }
-  function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
-      .then(() => {
-        setCards(cards.filter((c) => c._id !== card._id));
-      })
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
-  }
   return (
     <main className="content">
       <section className="profile">
-        <div className="profile__avatar-box" onClick={onEditAvatarClick}>
+        <div className="profile__avatar-box" onClick={props.onEditAvatarClick}>
           <img
             className="profile__avatar"
             style={{ backgroundImage: `url(${currentUser.avatar})` }}
@@ -63,23 +25,23 @@ export default function Main({
           className="profile__popup-button"
           aria-label="popupen"
           type="button"
-          onClick={onEditProfileClick}
+          onClick={props.onEditProfileClick}
         ></button>
         <button
           className="profile__add-button"
           aria-label="addbutton"
           type="button"
-          onClick={onAddPlaceClick}
+          onClick={props.onAddPlaceClick}
         ></button>
       </section>
       <section className="cards">
-        {cards.map((card) => (
+        {props.cards.map((card, index) => (
           <Card
-            key={card._id}
+            key={index}
             card={card}
-            onCardClick={onCardClick}
-            onDeleteClick={handleCardDelete}
-            onCardLike={handleCardLike}
+            onCardClick={props.onCardClick}
+            onCardLike={props.onCardLike}
+            onCardDelete={props.onCardDelete}
           />
         ))}
       </section>

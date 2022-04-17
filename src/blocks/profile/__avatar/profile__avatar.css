@@ -3,8 +3,10 @@
   margin: 0;
   height: 120px;
   width: 120px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   justify-self: center;
-  z-index: 1;
   transition: all 0.5s ease-in-out;
 }
 
@@ -13,5 +15,3 @@
     margin: auto;
   }
 }
-
-
