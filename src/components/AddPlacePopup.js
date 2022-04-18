@@ -30,7 +30,7 @@ export default function AddPlacePopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
-      buttonText="add"
+      buttonText={props.buttonText}
     >
       <input
         id="place-title-input"

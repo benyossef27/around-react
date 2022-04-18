@@ -3,6 +3,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import React from "react";
 import { useEffect, useState } from "react";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -18,6 +19,9 @@ export default function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [editAvaterButton, setEditAvatarButton] = useState("save");
+  const [editProfileButton, setEditProfileButton] = useState("save");
+  const [editAddPlaceButton, setEditAddPlaceButton] = useState("add");
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -35,6 +39,7 @@ export default function App() {
     setSelectedCard(card);
   }
   function handleUpdateUser({ name, about }) {
+    setEditProfileButton("saving...");
     api
       .setUserInfo({ name, about })
       .then((info) => {
@@ -43,9 +48,11 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
-      });
+      })
+      .finally(() => setEditProfileButton("save"));
   }
   function handleUpdateAvatar({ avatar }) {
+    setEditAvatarButton("saving...");
     api
       .setUserAvatar(avatar)
       .then((info) => {
@@ -54,9 +61,13 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        setEditAvatarButton("save");
       });
   }
   function handleAddPlaceSubmit(info) {
+    setEditAddPlaceButton("adding...");
     api
       .createCard(info)
       .then((newCard) => {
@@ -65,6 +76,9 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        setEditAddPlaceButton("add");
       });
   }
   function closeAllPopups() {
@@ -137,21 +151,24 @@ export default function App() {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            buttonText={editProfileButton}
           />
           <EditAvatarPopup
             isOpen={isAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            buttonText={editAvaterButton}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlaceSubmit={handleAddPlaceSubmit}
+            buttonText={editAddPlaceButton}
           />
           <PopupWithForm
             name="preview"
             title="Are you sure?"
-            submitButton="Yes"
+            submitButton={"Yes"}
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
           ></PopupWithForm>

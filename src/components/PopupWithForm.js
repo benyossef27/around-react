@@ -20,7 +20,7 @@ export default function PopupWithForm(props) {
         >
           {props.children}
           <button type="submit" className="popup__button">
-            {props.buttonText}
+            {`${props.buttonText}`}
           </button>
         </form>
       </div>
