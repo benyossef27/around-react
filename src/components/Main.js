@@ -10,10 +10,7 @@ export default function Main(props) {
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-box" onClick={props.onEditAvatarClick}>
-          <img
-            className="profile__avatar"
-            style={{ backgroundImage: `url(${currentUser.avatar})` }}
-          />
+          <img className="profile__avatar" alt="you" src={currentUser.avatar} />
           <img className="profile__avatar-edit" src={avatar_edit} />
         </div>
         <div className="profile__details">
@@ -34,9 +31,9 @@ export default function Main(props) {
         ></button>
       </section>
       <section className="cards">
-        {props.cards.map((card, index) => (
+        {props.cards.map((card) => (
           <Card
-            key={index}
+            key={card._id}
             card={card}
             onCardClick={props.onCardClick}
             onCardLike={props.onCardLike}

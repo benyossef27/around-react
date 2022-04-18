@@ -16,7 +16,7 @@ export default function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
   function handleEditProfileClick() {
@@ -39,7 +39,7 @@ export default function App() {
       .setUserInfo({ name, about })
       .then((info) => {
         setCurrentUser(info);
-        closePopups();
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
@@ -50,19 +50,24 @@ export default function App() {
       .setUserAvatar(avatar)
       .then((info) => {
         setCurrentUser(info);
-        closePopups();
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
       });
   }
   function handleAddPlaceSubmit(info) {
-    api.createCard(info).then((newCard) => {
-      setCards([newCard, ...cards]);
-    });
-    closePopups();
+    api
+      .createCard(info)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
-  function closePopups() {
+  function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -91,13 +96,18 @@ export default function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) =>
-        state.map((currentCard) =>
-          currentCard._id === card._id ? newCard : currentCard
-        )
-      );
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
   function handleCardDelete(card) {
     api
@@ -125,17 +135,17 @@ export default function App() {
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            onClose={closePopups}
+            onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
           <EditAvatarPopup
             isOpen={isAvatarPopupOpen}
-            onClose={closePopups}
+            onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
-            onClose={closePopups}
+            onClose={closeAllPopups}
             onAddPlaceSubmit={handleAddPlaceSubmit}
           />
           <PopupWithForm
@@ -143,9 +153,9 @@ export default function App() {
             title="Are you sure?"
             submitButton="Yes"
             isOpen={isDeletePopupOpen}
-            onClose={closePopups}
+            onClose={closeAllPopups}
           ></PopupWithForm>
-          <ImagePopup card={selectedCard} onClose={closePopups}></ImagePopup>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
           <Footer />
         </CurrentUserContext.Provider>
       </div>

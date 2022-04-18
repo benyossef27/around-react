@@ -4,14 +4,13 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
 export default function AddPlacePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
 
   React.useEffect(() => {
-    setName(currentUser && name);
-    setLink(currentUser && link);
-  }, [currentUser]);
+    setLink("");
+    setName("");
+  }, [props.isOpen]);
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -28,9 +27,10 @@ export default function AddPlacePopup(props) {
     <PopupWithForm
       name="place"
       title="Add place"
-      submitButton="Add"
       isOpen={props.isOpen}
       onClose={props.onClose}
+      onSubmit={handleSubmit}
+      buttonText="add"
     >
       <input
         id="place-title-input"
@@ -41,6 +41,7 @@ export default function AddPlacePopup(props) {
         minLength="1"
         maxLength="30"
         required
+        value={name}
         onChange={handleNameChange}
       />
       <span id="place-title-input-error"></span>
@@ -51,12 +52,10 @@ export default function AddPlacePopup(props) {
         placeholder="Image Url"
         className="popup__input popup__input_field_img"
         required
+        value={link}
         onChange={handleLinkChange}
       />
       <span id="place-img-input-error"></span>
-      <button type="submit" className="popup__button" onClick={handleSubmit}>
-        Add
-      </button>
     </PopupWithForm>
   );
 }

@@ -14,10 +14,14 @@ export default function PopupWithForm(props) {
         ></button>
         <h2 className="popup__heading">{props.title}</h2>
         <form
+          onSubmit={props.onSubmit}
           className={`popup__form popup__form_type_${props.name}`}
           name={`${props.name}form`}
         >
           {props.children}
+          <button type="submit" className="popup__button">
+            {props.buttonText}
+          </button>
         </form>
       </div>
     </div>

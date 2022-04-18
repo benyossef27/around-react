@@ -18,6 +18,7 @@ export default function EditAvatarPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
+      buttonText="save"
     >
       <input
         id="avatar-img-input"
@@ -29,9 +30,6 @@ export default function EditAvatarPopup(props) {
         ref={avatarRef}
       />
       <span id="avatar-img-input-error"></span>
-      <button type="submit" className="popup__button" onClick={handleSubmit}>
-        save
-      </button>
     </PopupWithForm>
   );
 }

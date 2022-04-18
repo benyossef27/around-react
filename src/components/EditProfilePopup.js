@@ -11,7 +11,7 @@ export default function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser && currentUser.name);
     setDescription(currentUser && currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -33,6 +33,8 @@ export default function EditProfilePopup(props) {
       title="Edit profile"
       isOpen={props.isOpen}
       onClose={props.onClose}
+      onSubmit={handleSubmit}
+      buttonText="save"
     >
       <input
         id="name-input"
@@ -60,9 +62,6 @@ export default function EditProfilePopup(props) {
         onChange={handleDescriptionChange}
       />
       <span id="job-input-error"></span>
-      <button type="submit" className="popup__button" onClick={handleSubmit}>
-        save
-      </button>
     </PopupWithForm>
   );
 }
