@@ -1,6 +1,5 @@
 import avatar_edit from "../images/profile/profile__popup-button.svg";
 import React, { useEffect, useState } from "react";
-import { api } from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
