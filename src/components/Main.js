@@ -1,5 +1,5 @@
 import avatar_edit from "../images/profile/profile__popup-button.svg";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 

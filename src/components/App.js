@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import React from "react";
 import { useEffect, useState } from "react";
@@ -10,6 +9,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import DeleteCardPopup from "./DeleteCardPopup";
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -22,18 +22,25 @@ export default function App() {
   const [editAvaterButton, setEditAvatarButton] = useState("save");
   const [editProfileButton, setEditProfileButton] = useState("save");
   const [editAddPlaceButton, setEditAddPlaceButton] = useState("add");
+  const [editDeleteCardButton, setEditDeleteCardButton] = useState("Yes");
+  const [deleteCard, setDeleteCard] = useState(null);
 
   function handleEditProfileClick() {
+    setEditProfileButton("save");
     setIsEditProfilePopupOpen(true);
   }
   function handleAvatarClick() {
+    setEditAvatarButton("save");
     setIsAvatarPopupOpen(true);
   }
   function handleAddPlaceClick() {
+    setEditAddPlaceButton("add");
     setIsAddPlacePopupOpen(true);
   }
-  function handleDeleteClick() {
+  function handleDeleteClick(card) {
+    setEditDeleteCardButton("Yes");
     setIsDeletePopupOpen(true);
+    setDeleteCard(card);
   }
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -48,8 +55,7 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
-      })
-      .finally(() => setEditProfileButton("save"));
+      });
   }
   function handleUpdateAvatar({ avatar }) {
     setEditAvatarButton("saving...");
@@ -61,9 +67,6 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
-      })
-      .finally(() => {
-        setEditAvatarButton("save");
       });
   }
   function handleAddPlaceSubmit(info) {
@@ -76,9 +79,6 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
-      })
-      .finally(() => {
-        setEditAddPlaceButton("add");
       });
   }
   function closeAllPopups() {
@@ -124,15 +124,18 @@ export default function App() {
       });
   }
   function handleCardDelete(card) {
+    setEditDeleteCardButton("deleteing...");
     api
       .deleteCard(card._id)
       .then(() => {
         setCards(cards.filter((deleted) => deleted._id !== card._id));
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
       });
   }
+
   return (
     <div className="page">
       <div className="root">
@@ -144,7 +147,7 @@ export default function App() {
             onEditProfileClick={handleEditProfileClick}
             onEditAvatarClick={handleAvatarClick}
             onAddPlaceClick={handleAddPlaceClick}
-            onCardDelete={handleCardDelete}
+            onCardDelete={handleDeleteClick}
             onCardClick={handleCardClick}
           />
           <EditProfilePopup
@@ -165,13 +168,13 @@ export default function App() {
             onAddPlaceSubmit={handleAddPlaceSubmit}
             buttonText={editAddPlaceButton}
           />
-          <PopupWithForm
-            name="preview"
-            title="Are you sure?"
-            submitButton={"Yes"}
+          <DeleteCardPopup
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
-          ></PopupWithForm>
+            onCardDelete={handleCardDelete}
+            buttonText={editDeleteCardButton}
+            card={deleteCard}
+          />
           <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
           <Footer />
         </CurrentUserContext.Provider>
