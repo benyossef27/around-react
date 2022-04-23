@@ -1,27 +1,24 @@
 import React from "react";
 import { useState } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
 export default function AddPlacePopup(props) {
-  const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [inputs, setInputs] = useState({});
 
   React.useEffect(() => {
-    setLink("");
-    setName("");
+    setInputs({});
   }, [props.isOpen]);
 
-  function handleNameChange(event) {
-    setName(event.target.value);
-  }
-  function handleLinkChange(event) {
-    setLink(event.target.value);
+  function handleinputs(event) {
+    setInputs({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    });
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onAddPlaceSubmit({ name, link });
+    props.onAddPlaceSubmit({ name: inputs.name, link: inputs.link });
   }
   return (
     <PopupWithForm
@@ -34,26 +31,26 @@ export default function AddPlacePopup(props) {
     >
       <input
         id="place-title-input"
-        name="placeHeading"
+        name="name"
         type="text"
         placeholder="Title"
         className="popup__input popup__input_field_heading"
         minLength="1"
         maxLength="30"
         required
-        value={name}
-        onChange={handleNameChange}
+        value={inputs.name || ""}
+        onChange={handleinputs}
       />
       <span id="place-title-input-error"></span>
       <input
         id="place-img-input"
-        name="placeImage"
+        name="link"
         type="url"
         placeholder="Image Url"
         className="popup__input popup__input_field_img"
         required
-        value={link}
-        onChange={handleLinkChange}
+        value={inputs.link || ""}
+        onChange={handleinputs}
       />
       <span id="place-img-input-error"></span>
     </PopupWithForm>
