@@ -45,6 +45,7 @@ export default function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
   }
+
   function handleUpdateUser({ name, about }) {
     setEditProfileButton("saving...");
     api
@@ -88,6 +89,7 @@ export default function App() {
     setIsDeletePopupOpen(false);
     setSelectedCard(null);
   }
+
   useEffect(() => {
     api
       .getUserInfo()
@@ -95,6 +97,17 @@ export default function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       });
+    const closeByOverLay = (evt) => {
+      if (
+        evt.target.classList.contains("popup_opened") ||
+        evt.target.classList.contains("popup__close")
+      ) {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener("click", closeByOverLay);
+    return () => document.removeEventListener("click", closeByOverLay);
   }, []);
 
   useEffect(() => {
@@ -106,6 +119,14 @@ export default function App() {
       .catch((err) => {
         console.log(`Error: ${err}`);
       });
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
 
   function handleCardLike(card) {
