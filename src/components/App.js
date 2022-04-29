@@ -10,6 +10,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
+import { SpinnerCircularSplit } from "spinners-react";
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -24,6 +25,13 @@ export default function App() {
   const [editAddPlaceButton, setEditAddPlaceButton] = useState("add");
   const [editDeleteCardButton, setEditDeleteCardButton] = useState("Yes");
   const [deleteCard, setDeleteCard] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   function handleEditProfileClick() {
     setEditProfileButton("save");
@@ -157,7 +165,24 @@ export default function App() {
       });
   }
 
-  return (
+  return loading ? (
+    <div className="page">
+      <div className="root">
+        <Header />
+        <div className="loading">
+          <SpinnerCircularSplit
+            size={500}
+            speed={100}
+            color="cyan"
+            display="flex"
+            display="flex"
+            alignself="center"
+          />
+        </div>
+        <Footer />
+      </div>
+    </div>
+  ) : (
     <div className="page">
       <div className="root">
         <CurrentUserContext.Provider value={currentUser}>

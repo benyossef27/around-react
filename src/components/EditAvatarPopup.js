@@ -3,7 +3,7 @@ import { useState } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 export default function EditAvatarPopup(props) {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState("");
   const [validation, setValidation] = useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -14,7 +14,7 @@ export default function EditAvatarPopup(props) {
 
   function handleinputs(event) {
     setInputs({
-      ...inputs,
+      inputs,
       [event.target.name]: event.target.value,
     });
     setValidation({
@@ -26,7 +26,7 @@ export default function EditAvatarPopup(props) {
   React.useEffect(() => {
     if (props.isOpen) {
       const formIsValid =
-        inputs.link && !Object.values(validation).every((val) => Boolean(val));
+        inputs && !Object.values(validation).every((val) => Boolean(val));
       setIsValid(formIsValid || false);
     }
   }, [validation, inputs, props.isOpen]);

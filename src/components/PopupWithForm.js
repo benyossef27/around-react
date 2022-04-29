@@ -1,7 +1,7 @@
 export default function PopupWithForm(props) {
-  const buttonClassName = ` popup__button ${
-    !props.isValid ? "popup__button_disabled" : ""
-  } `;
+  const buttonClassName = `${
+    props.isValid ? null : "popup__button_disabled"
+  } popup__button`;
   return (
     <div
       className={`popup popup_type_${props.name} ${
