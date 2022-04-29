@@ -23,12 +23,14 @@ export default function Card({ onCardClick, card, onCardDelete, onCardLike }) {
 
   return (
     <div className="card">
-      <div
+      <img
         className="card__image"
         onClick={handleClick}
-        style={{ backgroundImage: `url(${card.link})` }}
+        style={{ backgroundColor: "black" }}
+        src={card.link}
+        alt={card.name}
         aria-label={card.name}
-      ></div>
+      />
       <button
         className={cardDeleteButtonClassName}
         type="button"

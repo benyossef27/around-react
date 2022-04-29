@@ -1,7 +1,9 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import { useState } from "react";
 
 export default function DeleteCardPopup(props) {
+  const [isValid, setIsValid] = useState(true);
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onCardDelete(props.card);
@@ -15,6 +17,7 @@ export default function DeleteCardPopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
       buttonText={props.buttonText}
+      isValid={isValid}
     />
   );
 }

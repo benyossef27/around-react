@@ -1,4 +1,7 @@
 export default function PopupWithForm(props) {
+  const buttonClassName = ` popup__button ${
+    !props.isValid ? "popup__button_disabled" : ""
+  } `;
   return (
     <div
       className={`popup popup_type_${props.name} ${
@@ -19,7 +22,11 @@ export default function PopupWithForm(props) {
           name={`${props.name}form`}
         >
           {props.children}
-          <button type="submit" className="popup__button">
+          <button
+            type="submit"
+            className={buttonClassName}
+            disabled={!props.isValid}
+          >
             {`${props.buttonText}`}
           </button>
         </form>
