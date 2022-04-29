@@ -10,7 +10,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
-import { SpinnerCircularSplit } from "spinners-react";
+import { SpinnerInfinity } from "spinners-react";
 
 export default function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -26,12 +26,6 @@ export default function App() {
   const [editDeleteCardButton, setEditDeleteCardButton] = useState("Yes");
   const [deleteCard, setDeleteCard] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
 
   function handleEditProfileClick() {
     setEditProfileButton("save");
@@ -126,7 +120,13 @@ export default function App() {
       })
       .catch((err) => {
         console.log(`Error: ${err}`);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
       });
+
     const closeByEscape = (e) => {
       if (e.key === "Escape") {
         closeAllPopups();
@@ -170,7 +170,7 @@ export default function App() {
       <div className="root">
         <Header />
         <div className="loading">
-          <SpinnerCircularSplit
+          <SpinnerInfinity
             size={500}
             speed={100}
             color="cyan"
