@@ -179,6 +179,7 @@ export default function App() {
             alignself="center"
           />
         </div>
+        <p className="loading__text">Loading...</p>
         <Footer />
       </div>
     </div>
